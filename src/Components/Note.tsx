@@ -11,6 +11,10 @@ export const Note: FC<Props> = ({ object }) => {
   return (
     <div
       className="note"
+      style={{
+        left: object.x,
+        top: object.y,
+      }}
       // may need to change this
       dangerouslySetInnerHTML={{ __html: object.innerHTML }}
     />
