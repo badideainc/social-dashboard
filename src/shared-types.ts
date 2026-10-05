@@ -1,7 +1,5 @@
 export type BoardState = {
-  [key: string]: {
-    objects: BoardObject;
-  };
+  objects: BoardObject;
 };
 
 export type BoardObject = {
