@@ -3,7 +3,7 @@ import { Board } from "./Components/Board";
 
 function App() {
   //temp
-  return <Board id="123"></Board>;
+  return <Board />;
 }
 
 export default App;
