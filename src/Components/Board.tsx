@@ -1,10 +1,11 @@
 import { useState, type MouseEvent } from "react";
-import { type BoardObject } from "../shared-types";
+import { type BoardState } from "../shared-types";
 
 import "../css/board.scss";
+import { Note } from "./Note";
 
 export const Board = () => {
-  const [boardState, setBoardState] = useState<BoardObject>({});
+  const [boardState, setBoardState] = useState<BoardState>({});
 
   const handleOnClick = (event: MouseEvent<HTMLElement>) => {
     const objID = crypto.randomUUID();
@@ -12,9 +13,11 @@ export const Board = () => {
     setBoardState((b) => ({
       ...b,
       [objID]: {
-        x: event.clientX,
-        y: event.clientY,
-        innerHTML: "",
+        object: {
+          x: event.clientX,
+          y: event.clientY,
+          innerHTML: "",
+        },
       },
     }));
   };
@@ -24,13 +27,7 @@ export const Board = () => {
       <div className="board__toolbar"></div>
       <div className="board__body" onClick={handleOnClick}>
         {Object.keys(boardState).map((o) => {
-          return (
-            <div
-              className="note"
-              // may need to change this
-              dangerouslySetInnerHTML={{ __html: boardState[o].innerHTML }}
-            />
-          );
+          return <Note key={o} object={boardState[o].object} />;
         })}
       </div>
     </div>
