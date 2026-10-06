@@ -11,11 +11,23 @@ export const Note: FC<Props> = ({ object }) => {
   const [isSelected, setIsSelected] = useState(0);
   const [x, setX] = useState(object.x);
   const [y, setY] = useState(object.y);
+  const [offsetX, setOffsetX] = useState(0);
+  const [offsetY, setOffsetY] = useState(0);
+
+  const onDragStart = (event: MouseEvent<HTMLElement>) => {
+    const newX = event.currentTarget.clientLeft - event.clientX;
+    const newY = event.currentTarget.clientTop - event.clientY;
+
+    setOffsetX(newX);
+    setOffsetY(newY);
+  };
 
   const onDragEnd = (event: MouseEvent<HTMLElement>) => {
-    setX(event.clientX);
-    setY(event.clientY);
+    const newX = event.clientX + offsetX;
+    const newY = event.clientY + offsetY;
 
+    setX(newX);
+    setY(newY);
     //Notify position change
   };
 
@@ -27,6 +39,7 @@ export const Note: FC<Props> = ({ object }) => {
         top: y,
       }}
       draggable
+      onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       onClick={() => setIsSelected((s) => s + 1)}
       onMouseLeave={() => setIsSelected(0)}
