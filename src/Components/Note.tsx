@@ -15,16 +15,19 @@ export const Note: FC<Props> = ({ object }) => {
   const [offsetY, setOffsetY] = useState(0);
 
   const onDragStart = (event: MouseEvent<HTMLElement>) => {
-    const newX = event.currentTarget.clientLeft - event.clientX;
-    const newY = event.currentTarget.clientTop - event.clientY;
+    const elementRect = event.currentTarget.getBoundingClientRect();
+    const newX = event.clientX - elementRect.left;
+    const newY = event.clientY - elementRect.top;
+
+    console.log(event.currentTarget.clientTop);
 
     setOffsetX(newX);
     setOffsetY(newY);
   };
 
   const onDragEnd = (event: MouseEvent<HTMLElement>) => {
-    const newX = event.clientX + offsetX;
-    const newY = event.clientY + offsetY;
+    const newX = event.clientX - offsetX;
+    const newY = event.clientY - offsetY;
 
     setX(newX);
     setY(newY);
