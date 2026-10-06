@@ -17,6 +17,7 @@ export const Note: FC<Props> = ({ object }) => {
       }}
       // may need to change this
       dangerouslySetInnerHTML={{ __html: object.innerHTML }}
+      contentEditable
     />
   );
 };
