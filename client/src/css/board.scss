@@ -4,6 +4,15 @@
 
   overflow: hidden;
 
+  &__toolbar {
+    display: flex;
+    flex-direction: row;
+
+    .toolbar--closed {
+      display: none;
+    }
+  }
+
   &__body {
     width: 100%;
     height: 100%;
