@@ -1,11 +1,17 @@
-import { useState, type MouseEvent } from "react";
-import { type BoardState } from "../shared-types";
+import { useState, type FC, type MouseEvent } from "react";
+import { type BoardObjectStates, type BoardState } from "../shared-types";
 
 import "../css/board.scss";
 import { Note } from "./Note";
 
-export const Board = () => {
-  const [boardState, setBoardState] = useState<BoardState>({});
+export type Props = {
+  initState: BoardState;
+};
+
+export const Board: FC<Props> = ({ initState }) => {
+  const [boardObjects, setBoardObjects] = useState<BoardObjectStates>(
+    initState.objects,
+  );
   const [expectPlace, setExpectPlace] = useState(false);
 
   const handleOnClick = (event: MouseEvent<HTMLElement>) => {
@@ -14,7 +20,7 @@ export const Board = () => {
 
     const objID = crypto.randomUUID();
 
-    setBoardState((b) => ({
+    setBoardObjects((b) => ({
       ...b,
       [objID]: {
         object: {
@@ -31,8 +37,8 @@ export const Board = () => {
       <div className="board__toolbar"></div>
       <button onClick={() => setExpectPlace(true)}>+</button>
       <div className="board__body" onClick={handleOnClick}>
-        {Object.keys(boardState).map((o) => {
-          return <Note key={o} object={boardState[o].object} />;
+        {Object.keys(boardObjects).map((o) => {
+          return <Note key={o} object={boardObjects[o].object} />;
         })}
       </div>
     </div>
