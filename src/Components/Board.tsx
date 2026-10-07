@@ -13,6 +13,7 @@ export const Board: FC<Props> = ({ initState }) => {
     initState.objects,
   );
   const [expectPlace, setExpectPlace] = useState(false);
+  const [toolbarOpen, setToolbarOpen] = useState(false);
 
   const handleOnClick = (event: MouseEvent<HTMLElement>) => {
     if (!expectPlace) return;
@@ -34,8 +35,12 @@ export const Board: FC<Props> = ({ initState }) => {
 
   return (
     <div className="board">
-      <div className="board__toolbar"></div>
-      <button onClick={() => setExpectPlace(true)}>+</button>
+      <div className="board__toolbar">
+        <button onClick={() => setToolbarOpen(!toolbarOpen)}>+</button>
+        <div className={toolbarOpen ? `toolbar--open` : `toolbar--closed`}>
+          <button onClick={() => setExpectPlace(true)}>T</button>
+        </div>
+      </div>
       <div className="board__body" onClick={handleOnClick}>
         {Object.keys(boardObjects).map((o) => {
           return <Note key={o} object={boardObjects[o].object} />;
