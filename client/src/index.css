@@ -1,8 +1,17 @@
 :root {
+  --background-colour: white;
+
+  --note-tone0: #ecdf31;
+
+  --gap: 8px;
+  --spacer-sm: 16px;
+  --spacer-md: 32px;
+  --spacer-lg: 64px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --background-colour: black;
   }
 }
 
