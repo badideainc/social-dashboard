@@ -1,4 +1,10 @@
 export type BoardState = {
+  id: string;
+  name: string;
+  objects: BoardObjectStates;
+};
+
+export type BoardObjectStates = {
   [key: string]: {
     object: BoardObject;
   };
