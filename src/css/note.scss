@@ -14,6 +14,8 @@
     height: var(--body-size);
 
     padding: var(--gap);
+
+    overflow-wrap: break-word;
   }
 
   img {
