@@ -37,7 +37,9 @@ export const Board: FC<Props> = ({ initState }) => {
     <div className="board">
       <div className="board__toolbar">
         <button onClick={() => setToolbarOpen(!toolbarOpen)}>+</button>
-        <div className={toolbarOpen ? `toolbar--open` : `toolbar--closed`}>
+        <div
+          className={`toolbar ${toolbarOpen ? `toolbar--open` : `toolbar--closed`}`}
+        >
           <button onClick={() => setExpectPlace(true)}>T</button>
         </div>
       </div>
