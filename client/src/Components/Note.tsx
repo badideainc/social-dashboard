@@ -36,7 +36,7 @@ export const Note: FC<Props> = ({ object }) => {
 
   return (
     <div
-      className="note"
+      className={`note ${object.type == "IMAGE" ? `note--transparent` : ``}`}
       style={{
         left: x,
         top: y,
