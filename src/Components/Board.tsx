@@ -1,5 +1,9 @@
 import { useState, type FC, type MouseEvent } from "react";
-import { type BoardObjectStates, type BoardState } from "../shared-types";
+import {
+  type NoteType,
+  type BoardObjectStates,
+  type BoardState,
+} from "../shared-types";
 
 import "../css/board.scss";
 import { Note } from "./Note";
@@ -12,12 +16,11 @@ export const Board: FC<Props> = ({ initState }) => {
   const [boardObjects, setBoardObjects] = useState<BoardObjectStates>(
     initState.objects,
   );
-  const [expectPlace, setExpectPlace] = useState(false);
+  const [expectPlace, setExpectPlace] = useState<NoteType>("NONE");
   const [toolbarOpen, setToolbarOpen] = useState(false);
 
   const handleOnClick = (event: MouseEvent<HTMLElement>) => {
-    if (!expectPlace) return;
-    setExpectPlace(false);
+    if (expectPlace === "NONE") return;
 
     const objID = crypto.randomUUID();
 
@@ -28,6 +31,7 @@ export const Board: FC<Props> = ({ initState }) => {
           x: event.clientX,
           y: event.clientY,
           innerHTML: "",
+          type: expectPlace,
         },
       },
     }));
@@ -40,7 +44,8 @@ export const Board: FC<Props> = ({ initState }) => {
         <div
           className={`toolbar ${toolbarOpen ? `toolbar--open` : `toolbar--closed`}`}
         >
-          <button onClick={() => setExpectPlace(true)}>T</button>
+          <button onClick={() => setExpectPlace("TEXT")}>T</button>
+          <button onClick={() => setExpectPlace("IMAGE")}>I</button>
         </div>
       </div>
       <div className="board__body" onClick={handleOnClick}>
