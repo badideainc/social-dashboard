@@ -14,4 +14,7 @@ export type BoardObject = {
   x: number;
   y: number;
   innerHTML: string;
+  type: NoteType;
 };
+
+export type NoteType = "NONE" | "TEXT" | "IMAGE";
