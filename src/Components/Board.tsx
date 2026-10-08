@@ -8,6 +8,7 @@ import {
 import "../css/board.scss";
 import { Note } from "./Note";
 import { Modal } from "./Modal/Modal";
+import { ImageModal } from "./Modal/ImageModal";
 
 export type Props = {
   initState: BoardState;
@@ -40,13 +41,7 @@ export const Board: FC<Props> = ({ initState }) => {
 
   return (
     <div className="board">
-      <Modal
-        id="image"
-        width="90vw"
-        height="90vh"
-        isOpen={expectPlace === "IMAGE"}
-        children={<p>Paste URL</p>}
-      />
+      <ImageModal matchType={expectPlace} />
       <div className="board__toolbar">
         <button onClick={() => setToolbarOpen(!toolbarOpen)}>+</button>
         <div
