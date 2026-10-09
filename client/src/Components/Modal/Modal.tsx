@@ -15,7 +15,9 @@ export const Modal: FC<Props> = ({ id, width, height, isOpen, children }) => {
       className={`modal modal--${id} modal--${isOpen ? "open" : "closed"}`}
       style={{ width: width, height: height }}
     >
-      <button onClick={() => {}}>X</button>
+      <button className="button--close" onClick={() => {}}>
+        X
+      </button>
       {children}
     </div>
   );
