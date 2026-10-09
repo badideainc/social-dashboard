@@ -2,7 +2,7 @@ import { useState, type FC } from "react";
 import { Modal } from "./Modal";
 import type { NoteModalProps } from "../../shared-types";
 
-//https://cdn.pixabay.com/photo/2023/06/01/06/22/british-shorthair-8032816_640.jpg
+//https://gratisography.com/wp-content/uploads/2025/04/gratisography-cool-car-cat-800x525.jpg
 //Royalty free cat image
 
 export const ImageModal: FC<NoteModalProps> = ({
