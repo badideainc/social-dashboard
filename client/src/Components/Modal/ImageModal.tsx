@@ -1,32 +1,48 @@
 import { useState, type FC } from "react";
-import type { NoteType } from "../../shared-types";
 import { Modal } from "./Modal";
+import type { NoteModalProps } from "../../shared-types";
 
-type Props = {
-  matchType: NoteType;
-};
+//https://cdn.pixabay.com/photo/2023/06/01/06/22/british-shorthair-8032816_640.jpg
+//Royalty free cat image
 
-export const ImageModal: FC<Props> = ({ matchType }) => {
+export const ImageModal: FC<NoteModalProps> = ({
+  isOpen,
+  setNoteFormat,
+  setAwait,
+}) => {
   const [imagePath, setImagePath] = useState("");
+
+  //Only handle when open
+  if (isOpen) {
+    if (imagePath == "") {
+      setAwait(true);
+    } else {
+      setAwait(false);
+      setNoteFormat(`<img src=${imagePath} alt=${imagePath}></img>`);
+    }
+  }
 
   return (
     <Modal
       id="image"
       width="50vw"
       height="25vh"
-      isOpen={matchType === "IMAGE"}
+      isOpen={isOpen}
       children={
-        <form>
-          <p>Paste URL</p>
-          <input
-            name="imageURL"
-            placeholder="URL"
-            defaultValue={imagePath}
-            onChange={(
-              event: React.ChangeEvent<HTMLInputElement, HTMLInputElement>,
-            ) => setImagePath(event.target.value)}
-          ></input>
-        </form>
+        <>
+          <form>
+            <p>Paste URL</p>
+            <input
+              name="imageURL"
+              placeholder="URL"
+              defaultValue={imagePath}
+              onChange={(
+                event: React.ChangeEvent<HTMLInputElement, HTMLInputElement>,
+              ) => setImagePath(event.target.value)}
+            ></input>
+          </form>
+          <img src={imagePath} alt={imagePath}></img>
+        </>
       }
     />
   );
