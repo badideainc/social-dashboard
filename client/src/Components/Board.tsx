@@ -36,6 +36,8 @@ export const Board: FC<Props> = ({ initState }) => {
         },
       },
     }));
+
+    setExpectPlace("NONE");
   };
 
   return (
