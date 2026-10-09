@@ -1,12 +1,34 @@
 .modal {
+  --close-button-width: 25px;
+
   position: absolute;
   left: 25%;
 
   background-color: rgba(255, 255, 255, 0.3);
-}
 
-.modal--open {
-  display: block;
+  padding: var(--gap);
+
+  .button--close {
+    position: absolute;
+    right: 0px;
+  }
+
+  &--image {
+    display: grid;
+    grid-template-columns: 1fr 1fr var(--close-button-width);
+    gap: var(--gap);
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+
+      padding: var(--gap);
+    }
+
+    input {
+      width: 100%;
+    }
+  }
 }
 
 .modal--closed {
