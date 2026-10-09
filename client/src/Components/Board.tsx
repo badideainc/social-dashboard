@@ -7,7 +7,6 @@ import {
 
 import "../css/board.scss";
 import { Note } from "./Note";
-import { Modal } from "./Modal/Modal";
 import { ImageModal } from "./Modal/ImageModal";
 
 export type Props = {
