@@ -18,10 +18,15 @@ export const Board: FC<Props> = ({ initState }) => {
     initState.objects,
   );
   const [expectPlace, setExpectPlace] = useState<NoteType>("NONE");
+  //noteFormat only applies to first place, after note should handle itself
+  const [noteFormat, setNoteFormat] = useState("");
   const [toolbarOpen, setToolbarOpen] = useState(false);
 
+  //Separate check so note can define what "waiting" constitutes
+  const [awaitPlace, setAwaitPlace] = useState(false);
+
   const handleOnClick = (event: MouseEvent<HTMLElement>) => {
-    if (expectPlace === "NONE") return;
+    if (expectPlace === "NONE" || awaitPlace) return;
 
     const objID = crypto.randomUUID();
 
@@ -31,18 +36,23 @@ export const Board: FC<Props> = ({ initState }) => {
         object: {
           x: event.clientX,
           y: event.clientY,
-          innerHTML: "",
+          innerHTML: noteFormat,
           type: expectPlace,
         },
       },
     }));
 
     setExpectPlace("NONE");
+    setNoteFormat("");
   };
 
   return (
     <div className="board">
-      <ImageModal matchType={expectPlace} />
+      <ImageModal
+        isOpen={expectPlace === "IMAGE"}
+        setNoteFormat={setNoteFormat}
+        setAwait={setAwaitPlace}
+      />
       <div className="board__toolbar">
         <button onClick={() => setToolbarOpen(!toolbarOpen)}>+</button>
         <div
