@@ -18,3 +18,9 @@ export type BoardObject = {
 };
 
 export type NoteType = "NONE" | "TEXT" | "IMAGE";
+
+export type NoteModalProps = {
+  isOpen: boolean;
+  setNoteFormat: React.Dispatch<React.SetStateAction<string>>;
+  setAwait: React.Dispatch<React.SetStateAction<boolean>>;
+};
