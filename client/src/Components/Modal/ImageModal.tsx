@@ -1,6 +1,7 @@
 import { useState, type FC } from "react";
 import { Modal } from "./Modal";
 import type { NoteModalProps } from "../../shared-types";
+import { validateImage } from "../../util/validateImage";
 
 //https://gratisography.com/wp-content/uploads/2025/04/gratisography-cool-car-cat-800x525.jpg
 //Royalty free cat image
@@ -22,6 +23,18 @@ export const ImageModal: FC<NoteModalProps> = ({
     }
   }
 
+  const onChange = (
+    event: React.ChangeEvent<HTMLInputElement, HTMLInputElement>,
+  ) => {
+    const newURL = event.target.value;
+
+    if (validateImage(newURL)) {
+      setImagePath(newURL);
+    } else {
+      console.log("Invalid Path");
+    }
+  };
+
   return (
     <Modal
       id="image"
@@ -30,18 +43,20 @@ export const ImageModal: FC<NoteModalProps> = ({
       isOpen={isOpen}
       children={
         <>
-          <form>
+          <div>
             <p>Paste URL</p>
             <input
               name="imageURL"
               placeholder="URL"
               defaultValue={imagePath}
-              onChange={(
-                event: React.ChangeEvent<HTMLInputElement, HTMLInputElement>,
-              ) => setImagePath(event.target.value)}
+              onChange={onChange}
             ></input>
-          </form>
-          <img src={imagePath} alt={imagePath}></img>
+          </div>
+          {imagePath === "" ? (
+            <></>
+          ) : (
+            <img src={imagePath} alt={imagePath}></img>
+          )}
         </>
       }
     />
