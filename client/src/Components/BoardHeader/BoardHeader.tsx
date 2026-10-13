@@ -12,7 +12,7 @@ export const BoardHeader: FC<Props> = ({ setExpectPlace, currentNote }) => {
   const currentNoteType = currentNote?.type || "NONE";
 
   return (
-    <header className="board__toolbar">
+    <div className="board__toolbar">
       <BoardHeaderRow
         currentNoteType={currentNoteType}
         conditionNoteType="NONE"
@@ -37,6 +37,6 @@ export const BoardHeader: FC<Props> = ({ setExpectPlace, currentNote }) => {
           </>
         }
       ></BoardHeaderRow>
-    </header>
+    </div>
   );
 };
