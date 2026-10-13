@@ -49,7 +49,7 @@ export const Note: FC<Props> = ({ object }) => {
     >
       <div // may need to change this
         dangerouslySetInnerHTML={{ __html: object.innerHTML }}
-        contentEditable={isSelected > 0 ? true : false}
+        contentEditable={isSelected > 0 && !object.static ? true : false}
         className="note__body"
       ></div>
     </div>
