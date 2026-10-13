@@ -36,14 +36,15 @@ export const Note: FC<Props> = ({ id, object, setCurrentNote }) => {
     //Notify position change
   };
 
-  const onClick = () => {
+  const onClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+
     setCurrentNote(id);
     setIsSelected((s) => s + 1);
   };
 
   const onMouseLeave = () => {
-    //setCurrentNote(undefined);
-    //setIsSelected(0);
+    setIsSelected(0);
   };
 
   return (

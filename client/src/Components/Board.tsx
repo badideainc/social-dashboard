@@ -27,6 +27,8 @@ export const Board: FC<Props> = ({ initState }) => {
   const [awaitPlace, setAwaitPlace] = useState(false);
 
   const handleOnClick = (event: MouseEvent<HTMLElement>) => {
+    setCurrentNoteID("");
+
     if (expectPlace === "NONE" || awaitPlace) return;
 
     const objID = crypto.randomUUID();
