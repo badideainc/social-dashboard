@@ -38,6 +38,7 @@ export const Board: FC<Props> = ({ initState }) => {
           y: event.clientY,
           innerHTML: noteFormat,
           type: expectPlace,
+          static: expectPlace == "IMAGE",
         },
       },
     }));
