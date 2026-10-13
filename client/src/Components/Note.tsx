@@ -4,10 +4,12 @@ import type { BoardObject } from "../shared-types";
 import "../css/note.scss";
 
 type Props = {
+  id: string;
   object: BoardObject;
+  setCurrentNote: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const Note: FC<Props> = ({ object }) => {
+export const Note: FC<Props> = ({ id, object, setCurrentNote }) => {
   const [isSelected, setIsSelected] = useState(0);
   const [x, setX] = useState(object.x);
   const [y, setY] = useState(object.y);
@@ -34,20 +36,32 @@ export const Note: FC<Props> = ({ object }) => {
     //Notify position change
   };
 
+  const onClick = () => {
+    setCurrentNote(id);
+    setIsSelected((s) => s + 1);
+  };
+
+  const onMouseLeave = () => {
+    //setCurrentNote(undefined);
+    //setIsSelected(0);
+  };
+
   return (
     <div
+      id={id}
       className={`note ${object.type == "IMAGE" ? `note--transparent` : ``}`}
       style={{
         left: x,
         top: y,
       }}
-      draggable
+      draggable={isSelected === 0}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
-      onClick={() => setIsSelected((s) => s + 1)}
-      onMouseLeave={() => setIsSelected(0)}
+      onClick={onClick}
+      onMouseLeave={onMouseLeave}
     >
       <div // may need to change this
+        id={`${id}__body`}
         dangerouslySetInnerHTML={{ __html: object.innerHTML }}
         contentEditable={isSelected > 0 && !object.static ? true : false}
         className="note__body"
