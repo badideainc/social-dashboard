@@ -1,11 +1,15 @@
 .note {
+  --note-colour: var(--note-tone0);
   position: absolute;
 
   width: 250px;
   height: 250px;
 
   color: rgba(0, 0, 0, 0.8);
-  background-color: var(--note-tone0);
+  background-color: var(--note-colour);
+
+  border-radius: var(--gap);
+  box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
 
   &__body {
     --body-size: calc(100% - var(--gap) * 2);
