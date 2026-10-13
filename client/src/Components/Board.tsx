@@ -8,6 +8,7 @@ import {
 import "../css/board.scss";
 import { Note } from "./Note";
 import { ImageModal } from "./Modal/ImageModal";
+import { BoardHeader } from "./BoardHeader/BoardHeader";
 
 export type Props = {
   initState: BoardState;
@@ -20,7 +21,7 @@ export const Board: FC<Props> = ({ initState }) => {
   const [expectPlace, setExpectPlace] = useState<NoteType>("NONE");
   //noteFormat only applies to first place, after note should handle itself
   const [noteFormat, setNoteFormat] = useState("");
-  const [toolbarOpen, setToolbarOpen] = useState(false);
+  const [currentNoteID, setCurrentNoteID] = useState("");
 
   //Separate check so note can define what "waiting" constitutes
   const [awaitPlace, setAwaitPlace] = useState(false);
@@ -54,18 +55,20 @@ export const Board: FC<Props> = ({ initState }) => {
         setNoteFormat={setNoteFormat}
         setAwait={setAwaitPlace}
       />
-      <div className="board__toolbar">
-        <button onClick={() => setToolbarOpen(!toolbarOpen)}>+</button>
-        <div
-          className={`toolbar ${toolbarOpen ? `toolbar--open` : `toolbar--closed`}`}
-        >
-          <button onClick={() => setExpectPlace("TEXT")}>T</button>
-          <button onClick={() => setExpectPlace("IMAGE")}>I</button>
-        </div>
-      </div>
+      <BoardHeader
+        setExpectPlace={setExpectPlace}
+        currentNote={boardObjects[currentNoteID]?.object || undefined}
+      />
       <div className="board__body" onClick={handleOnClick}>
         {Object.keys(boardObjects).map((o) => {
-          return <Note key={o} object={boardObjects[o].object} />;
+          return (
+            <Note
+              key={o}
+              id={o}
+              object={boardObjects[o].object}
+              setCurrentNote={setCurrentNoteID}
+            />
+          );
         })}
       </div>
     </div>
