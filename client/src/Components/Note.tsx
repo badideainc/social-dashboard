@@ -50,7 +50,7 @@ export const Note: FC<Props> = ({ id, object, setCurrentNote }) => {
   return (
     <div
       id={id}
-      className={`note note--${object.type.toLocaleLowerCase()} ${object.type == "IMAGE" ? `note--transparent` : ``}`}
+      className={`note ${object.innerHTML == "" ? "note--empty" : ""} note--${object.type.toLocaleLowerCase()} ${object.type == "IMAGE" ? `note--transparent` : ``}`}
       style={{
         left: x,
         top: y,
