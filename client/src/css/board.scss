@@ -17,13 +17,17 @@
       display: flex;
       flex-direction: row;
 
-      > button {
-        width: var(--button-size);
+      button {
+        min-width: var(--button-size);
         height: var(--button-size);
       }
 
-      > * {
-        margin-right: calc(var(--gap) / 2);
+      > div {
+        margin-right: var(--gap);
+
+        > * {
+          margin-right: calc(var(--gap) / 2);
+        }
       }
     }
 
