@@ -3,6 +3,7 @@ import {
   type NoteType,
   type BoardObjectStates,
   type BoardState,
+  type BoardObject,
 } from "../shared-types";
 
 import "../css/board.scss";
@@ -50,6 +51,22 @@ export const Board: FC<Props> = ({ initState }) => {
     setNoteFormat("");
   };
 
+  const deleteNote = (note: BoardObject) => {
+    const key = Object.keys(boardObjects).find(
+      (o) => boardObjects[o].object === note,
+    );
+
+    if (key === undefined) {
+      console.warn("Could not find key");
+      return;
+    }
+
+    const tempState = { ...boardObjects };
+    delete tempState[key];
+
+    setBoardObjects(tempState);
+  };
+
   return (
     <div className="board">
       <ImageModal
@@ -59,6 +76,7 @@ export const Board: FC<Props> = ({ initState }) => {
       />
       <BoardHeader
         setExpectPlace={setExpectPlace}
+        deleteNote={deleteNote}
         currentNote={boardObjects[currentNoteID]?.object || undefined}
       />
       <div className="board__body" onClick={handleOnClick}>
