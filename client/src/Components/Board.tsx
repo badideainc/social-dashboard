@@ -10,6 +10,7 @@ import "../css/board.scss";
 import { Note } from "./Note";
 import { ImageModal } from "./Modal/ImageModal";
 import { BoardHeader } from "./BoardHeader/BoardHeader";
+import { config } from "../config";
 
 export type Props = {
   initState: BoardState;
@@ -40,6 +41,8 @@ export const Board: FC<Props> = ({ initState }) => {
         object: {
           x: event.clientX,
           y: event.clientY,
+          width: config.DEFAULT_NOTE_WIDTH,
+          height: config.DEFAULT_NOTE_HEIGHT,
           innerHTML: noteFormat,
           type: expectPlace,
           static: expectPlace == "IMAGE",
