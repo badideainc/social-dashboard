@@ -5,10 +5,15 @@ import { insertAtMouseSelection } from "../../util/insertAtMouseSelection";
 
 type Props = {
   setExpectPlace: (value: React.SetStateAction<NoteType>) => void;
+  deleteNote: (note: BoardObject) => void;
   currentNote: BoardObject | undefined;
 };
 
-export const BoardHeader: FC<Props> = ({ setExpectPlace, currentNote }) => {
+export const BoardHeader: FC<Props> = ({
+  setExpectPlace,
+  deleteNote,
+  currentNote,
+}) => {
   const currentNoteType = currentNote?.type || "NONE";
 
   return (
@@ -17,10 +22,10 @@ export const BoardHeader: FC<Props> = ({ setExpectPlace, currentNote }) => {
         currentNoteType={currentNoteType}
         conditionNoteType="NONE"
         children={
-          <>
+          <div>
             <button onClick={() => setExpectPlace("TEXT")}>T</button>
             <button onClick={() => setExpectPlace("IMAGE")}>I</button>
-          </>
+          </div>
         }
       ></BoardHeaderRow>
       <BoardHeaderRow
@@ -28,12 +33,28 @@ export const BoardHeader: FC<Props> = ({ setExpectPlace, currentNote }) => {
         conditionNoteType="TEXT"
         children={
           <>
-            <button onClick={() => insertAtMouseSelection("b")}>
-              <b>B</b>
-            </button>
-            <button onClick={() => insertAtMouseSelection("i")}>
-              <i>I</i>
-            </button>
+            <div>
+              <button onClick={() => insertAtMouseSelection("b")}>
+                <b>B</b>
+              </button>
+              <button onClick={() => insertAtMouseSelection("i")}>
+                <i>I</i>
+              </button>
+            </div>
+            <div>
+              <button onClick={() => deleteNote(currentNote!)}>Delete</button>
+            </div>
+          </>
+        }
+      ></BoardHeaderRow>
+      <BoardHeaderRow
+        currentNoteType={currentNoteType}
+        conditionNoteType="IMAGE"
+        children={
+          <>
+            <div>
+              <button onClick={() => deleteNote(currentNote!)}>Delete</button>
+            </div>
           </>
         }
       ></BoardHeaderRow>
