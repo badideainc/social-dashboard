@@ -13,6 +13,8 @@ export type BoardObjectStates = {
 export type BoardObject = {
   x: number;
   y: number;
+  width: number;
+  height: number;
   innerHTML: string;
   type: NoteType;
   static: boolean;
