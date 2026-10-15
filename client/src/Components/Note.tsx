@@ -50,11 +50,15 @@ export const Note: FC<Props> = ({ id, object, setCurrentNote }) => {
   return (
     <div
       id={id}
-      className={`note ${object.innerHTML == "" ? "note--empty" : ""} note--${object.type.toLocaleLowerCase()} ${object.type == "IMAGE" ? `note--transparent` : ``}`}
-      style={{
-        left: x,
-        top: y,
-      }}
+      className={`note note--${object.type.toLocaleLowerCase()} ${object.type == "IMAGE" ? `note--transparent` : ``}`}
+      style={
+        {
+          left: x,
+          top: y,
+          "--note-width": `${object.width}px`,
+          "--note-height": `${object.height}px`,
+        } as React.CSSProperties
+      }
       draggable={isSelected === 0}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
