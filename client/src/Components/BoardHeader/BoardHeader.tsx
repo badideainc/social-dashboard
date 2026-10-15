@@ -14,13 +14,12 @@ export const BoardHeader: FC<Props> = ({
   deleteNote,
   currentNote,
 }) => {
-  const currentNoteType = currentNote?.type || "NONE";
-
   return (
     <div className="board__toolbar">
       <BoardHeaderRow
-        currentNoteType={currentNoteType}
+        currentNote={currentNote}
         conditionNoteType="NONE"
+        deleteNote={deleteNote}
         children={
           <div>
             <button onClick={() => setExpectPlace("TEXT")}>T</button>
@@ -29,8 +28,9 @@ export const BoardHeader: FC<Props> = ({
         }
       ></BoardHeaderRow>
       <BoardHeaderRow
-        currentNoteType={currentNoteType}
+        currentNote={currentNote}
         conditionNoteType="TEXT"
+        deleteNote={deleteNote}
         children={
           <>
             <div>
@@ -41,22 +41,14 @@ export const BoardHeader: FC<Props> = ({
                 <i>I</i>
               </button>
             </div>
-            <div>
-              <button onClick={() => deleteNote(currentNote!)}>Delete</button>
-            </div>
           </>
         }
       ></BoardHeaderRow>
       <BoardHeaderRow
-        currentNoteType={currentNoteType}
+        deleteNote={deleteNote}
+        currentNote={currentNote}
         conditionNoteType="IMAGE"
-        children={
-          <>
-            <div>
-              <button onClick={() => deleteNote(currentNote!)}>Delete</button>
-            </div>
-          </>
-        }
+        children={<></>}
       ></BoardHeaderRow>
     </div>
   );
