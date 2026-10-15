@@ -2,6 +2,7 @@
   --close-button-width: 25px;
 
   position: absolute;
+  top: calc(var(--board-header-height) + var(--spacer-md));
   left: 25%;
 
   background-color: rgba(255, 255, 255, 0.3);
