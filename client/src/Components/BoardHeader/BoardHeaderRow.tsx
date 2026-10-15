@@ -1,22 +1,45 @@
 import type { FC } from "react";
-import type { NoteType } from "../../shared-types";
+import type { BoardObject, NoteType } from "../../shared-types";
 
 type Props = {
-  currentNoteType: NoteType;
+  currentNote: BoardObject | undefined;
   conditionNoteType: NoteType;
   children: React.ReactNode;
+  deleteNote: (note: BoardObject) => void;
 };
 
 export const BoardHeaderRow: FC<Props> = ({
-  currentNoteType,
+  currentNote,
   conditionNoteType,
   children,
+  deleteNote,
 }) => {
+  const noteType = currentNote?.type || "NONE";
+
   return (
     <div
       className={`board__toolbar--${conditionNoteType.toLocaleLowerCase()} 
-    ${currentNoteType === conditionNoteType ? "board__toolbar--visible" : "board__toolbar--hidden"}`}
+    ${noteType === conditionNoteType ? "board__toolbar--visible" : "board__toolbar--hidden"}`}
     >
+      {
+        //Guaranteed to need to be on the toolbar if a note is selected
+        noteType === "NONE" ? (
+          <></>
+        ) : (
+          <>
+            <div>
+              <label>
+                W: <input name="note-width" value={currentNote?.width}></input>
+                H:{" "}
+                <input name="note-height" value={currentNote?.height}></input>
+              </label>
+            </div>
+            <div>
+              <button onClick={() => deleteNote(currentNote!)}>Delete</button>
+            </div>
+          </>
+        )
+      }
       {children}
     </div>
   );
