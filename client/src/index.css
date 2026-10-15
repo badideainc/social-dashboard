@@ -9,6 +9,9 @@
   --spacer-lg: 64px;
 
   --header-height: 56px;
+  --toolbar-height: 24px;
+
+  --board-header-height: calc(var(--header-height) + var(--toolbar-height));
 }
 
 @media (prefers-color-scheme: dark) {
