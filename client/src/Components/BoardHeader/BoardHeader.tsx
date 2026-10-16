@@ -5,7 +5,7 @@ import { insertAtMouseSelection } from "../../util/insertAtMouseSelection";
 
 type Props = {
   setExpectPlace: (value: React.SetStateAction<NoteType>) => void;
-  modifyNote: (note: BoardObject, isDeleting: boolean) => void;
+  modifyNote: (note: BoardObject, isDeleting?: boolean) => void;
   currentNote: BoardObject | undefined;
 };
 
