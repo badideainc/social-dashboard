@@ -6,7 +6,7 @@
   position: absolute;
 
   width: var(--note-width);
-  height: var(--note-height);
+  min-height: var(--note-height);
 
   color: rgba(0, 0, 0, 0.8);
   background-color: var(--note-colour);
@@ -15,10 +15,11 @@
   box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
 
   &__body {
-    --body-size: calc(100% - var(--gap) * 2);
+    --body-width: calc(var(--note-width) - var(--gap) * 2);
+    --body-height: calc(var(--note-height) - var(--gap) * 2);
 
-    width: var(--body-size);
-    height: var(--body-size);
+    width: var(--body-width);
+    min-height: var(--body-height);
 
     padding: var(--gap);
 
