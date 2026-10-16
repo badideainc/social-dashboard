@@ -1,4 +1,6 @@
 export const config = {
   DEFAULT_NOTE_WIDTH: 250,
   DEFAULT_NOTE_HEIGHT: 250,
+  MIN_NOTE_SIZE: 15,
+  MAX_NOTE_SIZE: 1500,
 };
