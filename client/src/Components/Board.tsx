@@ -54,7 +54,8 @@ export const Board: FC<Props> = ({ initState }) => {
     setNoteFormat("");
   };
 
-  const deleteNote = (note: BoardObject) => {
+  //After a note is edited this will refresh state
+  const modifyNote = (note: BoardObject, isDeleting: boolean = false) => {
     const key = Object.keys(boardObjects).find(
       (o) => boardObjects[o].object === note,
     );
@@ -65,8 +66,7 @@ export const Board: FC<Props> = ({ initState }) => {
     }
 
     const tempState = { ...boardObjects };
-    delete tempState[key];
-
+    isDeleting ? delete tempState[key] : (tempState[key].object = note);
     setBoardObjects(tempState);
   };
 
@@ -79,7 +79,7 @@ export const Board: FC<Props> = ({ initState }) => {
       />
       <BoardHeader
         setExpectPlace={setExpectPlace}
-        deleteNote={deleteNote}
+        modifyNote={modifyNote}
         currentNote={boardObjects[currentNoteID]?.object || undefined}
       />
       <div className="board__body" onClick={handleOnClick}>
