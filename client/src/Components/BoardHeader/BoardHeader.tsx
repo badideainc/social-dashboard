@@ -5,13 +5,13 @@ import { insertAtMouseSelection } from "../../util/insertAtMouseSelection";
 
 type Props = {
   setExpectPlace: (value: React.SetStateAction<NoteType>) => void;
-  deleteNote: (note: BoardObject) => void;
+  modifyNote: (note: BoardObject, isDeleting: boolean) => void;
   currentNote: BoardObject | undefined;
 };
 
 export const BoardHeader: FC<Props> = ({
   setExpectPlace,
-  deleteNote,
+  modifyNote,
   currentNote,
 }) => {
   return (
@@ -19,7 +19,7 @@ export const BoardHeader: FC<Props> = ({
       <BoardHeaderRow
         currentNote={currentNote}
         conditionNoteType="NONE"
-        deleteNote={deleteNote}
+        modifyNote={modifyNote}
         children={
           <div>
             <button onClick={() => setExpectPlace("TEXT")}>T</button>
@@ -30,7 +30,7 @@ export const BoardHeader: FC<Props> = ({
       <BoardHeaderRow
         currentNote={currentNote}
         conditionNoteType="TEXT"
-        deleteNote={deleteNote}
+        modifyNote={modifyNote}
         children={
           <>
             <div>
@@ -45,7 +45,7 @@ export const BoardHeader: FC<Props> = ({
         }
       ></BoardHeaderRow>
       <BoardHeaderRow
-        deleteNote={deleteNote}
+        modifyNote={modifyNote}
         currentNote={currentNote}
         conditionNoteType="IMAGE"
         children={<></>}

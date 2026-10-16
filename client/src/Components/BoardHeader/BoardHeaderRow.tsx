@@ -5,14 +5,14 @@ type Props = {
   currentNote: BoardObject | undefined;
   conditionNoteType: NoteType;
   children: React.ReactNode;
-  deleteNote: (note: BoardObject) => void;
+  modifyNote: (note: BoardObject, isDeleting: boolean) => void;
 };
 
 export const BoardHeaderRow: FC<Props> = ({
   currentNote,
   conditionNoteType,
   children,
-  deleteNote,
+  modifyNote,
 }) => {
   const noteType = currentNote?.type || "NONE";
 
@@ -35,7 +35,9 @@ export const BoardHeaderRow: FC<Props> = ({
               </label>
             </div>
             <div>
-              <button onClick={() => deleteNote(currentNote!)}>Delete</button>
+              <button onClick={() => modifyNote(currentNote!, true)}>
+                Delete
+              </button>
             </div>
           </>
         )
