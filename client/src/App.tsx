@@ -1,9 +1,11 @@
 import "./App.css";
 import { Board } from "./Components/Board";
 import type { BoardState } from "./shared-types";
+import { fetchBoard } from "./util/fetchBoard";
 
 function App() {
-  //need to fetch the board
+  fetchBoard();
+
   const boardState: BoardState = { id: "test", name: "Test", objects: {} };
 
   //temp
