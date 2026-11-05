@@ -18,9 +18,9 @@ Resources:
   GetBoardFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/
+      CodeUri: src/lambda
       Handler: getBoard.handler
-      Runtime: python3.14
+      Runtime: nodejs22.x
       Architectures:
         - x86_64
       Events:
